@@ -1,10 +1,10 @@
 # Sky price tracker
 
-This project does regular price tracking and on-demand price tracking for airline tickets.
+This project does regular price tracking and on-demand price tracking for the airline tickets.
 
 # Implementation Plan
 
-* User insert the destination airport and the check-in, check-out date.
+* An user inserts the destination airport and the check-in, check-out date.
 * Crawl data from the airline ticket information sites. (ex: Sky scanner, Naver flights, Expedia, ...)
 * Save the results to database.
 * Show the results to users.

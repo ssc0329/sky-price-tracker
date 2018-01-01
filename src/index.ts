@@ -1,5 +1,5 @@
 import NaverTracker from "./naverTracker";
-const exampleCheckIn = new Date(2018, 3, 5);
+const exampleCheckIn = new Date(2018, 3, 3);
 const exampleCheckOut = new Date(2018, 3, 10);
 
 const naverTracker = new NaverTracker(
