@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "outDir": "./dst/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "allowUnusedLabels": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "module": "commonjs",
+    "target": "es6",
+    "lib": [
+      "es6",
+      "es2016",
+      "dom",
+      "esnext.asynciterable"
+    ],
+    "removeComments": true,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules/**/*"
+  ]
+}
