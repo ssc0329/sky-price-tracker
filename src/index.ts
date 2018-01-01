@@ -1,10 +1,10 @@
 import NaverTracker from "./naverTracker";
-const exampleCheckIn = new Date(2018, 3, 3);
-const exampleCheckOut = new Date(2018, 3, 10);
+const exampleCheckIn = new Date(2018, 1, 4);
+const exampleCheckOut = new Date(2018, 1, 7);
 
 const naverTracker = new NaverTracker(
-  "인천",
-  "타쉬켄트",
+  "ICN",
+  "HKG",
   exampleCheckIn,
   exampleCheckOut,
   2
