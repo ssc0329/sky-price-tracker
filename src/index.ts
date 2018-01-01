@@ -1,22 +1,13 @@
-import { PriceSearchParams } from "./types/priceSearchParams";
+import NaverTracker from "./naverTracker";
+const exampleCheckIn = new Date(2018, 3, 5);
+const exampleCheckOut = new Date(2018, 3, 10);
 
-class NaverTracker implements PriceSearchParams {
-  fromAirport: string;
-  toAirport: string;
-  checkInDate: Date;
-  checkOutDate: Date;
+const naverTracker = new NaverTracker(
+  "인천",
+  "타쉬켄트",
+  exampleCheckIn,
+  exampleCheckOut,
+  2
+);
 
-  constructor(
-    fromAirport: string,
-    toAirport: string,
-    checkInDate: Date,
-    checkOutDate: Date
-  ) {
-    this.fromAirport = fromAirport;
-    this.toAirport = toAirport;
-    this.checkInDate = checkInDate;
-    this.checkOutDate = checkOutDate;
-  }
-
-  public getPrices() {}
-}
+naverTracker.getPrices();

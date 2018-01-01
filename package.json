@@ -10,11 +10,11 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.17.1",
-    "casperjs": "^1.1.4",
-    "phantomjs-prebuilt": "^2.1.16"
+    "puppeteer": "^0.13.0"
   },
   "devDependencies": {
-    "@types/casperjs": "^1.1.0",
+    "@types/puppeteer": "^0.13.9",
+    "ts-node": "^4.1.0",
     "typescript": "^2.6.2"
   }
 }
