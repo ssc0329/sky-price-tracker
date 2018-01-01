@@ -32,7 +32,7 @@ This project does regular price tracking and on-demand price tracking for airlin
 ## Crawling
 
 * Use PhantomJS to get JS rendering result. (I heard that I can use JS parser but I think it's too complex to use.)
-* Progress 0 / 10
+* Progress 1 / 10
 
 ## Database
 
