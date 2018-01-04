@@ -55,7 +55,7 @@ export default class NaverTracker extends BasicPriceTracker {
       return await this.mapSearchResult();
     } catch (err) {
       console.error(err);
-      await this.page.screenshot({ path: "dst/error.png" });
+      await this.page.screenshot({ path: "dst/naverError.png" });
     } finally {
       await this.closeBrowser();
     }
