@@ -10,9 +10,7 @@ export default class SkyScannerTracker extends BasicPriceTracker {
 
   private async mapSearchResult() {
     // TODO: Map another attributes (Date, Airport, ...)
-    const minPayText: string = await this.page.evaluate(
-      () => document.querySelector("[class^='CTASection__total-price']").textContent,
-    );
+    const minPayText: string = await this.page.evaluate(() => document.querySelector(".fqs-price").textContent);
     const numberOnlyRegExp = /\D+/g;
     const cleanMinPayString = minPayText.replace(numberOnlyRegExp, "");
     const minPay = parseInt(cleanMinPayString, 10);
