@@ -1,5 +1,5 @@
 import * as puppeteer from "puppeteer";
-import { BasicPriceTracker } from "../common/basicPriceSearch";
+import { BasicPriceTracker, PriceResult } from "../common/basicPriceSearch";
 
 export default class GoogleTracker extends BasicPriceTracker {
   private async getSearchResult() {
@@ -25,12 +25,13 @@ export default class GoogleTracker extends BasicPriceTracker {
           .querySelector("div").textContent,
     );
 
-    const minPay = parseInt(this.parsePayText(minPayText), 10);
+    const minPay = parseInt(this.parsePayText(minPayText), 10) / this.adultCount;
     console.log("google minimum price", minPay);
     await this.page.screenshot({ path: "dst/googleResult.png" });
 
     return {
-      minPay,
+      minPrice: minPay,
+      from: "google flight",
     };
   }
 
@@ -52,7 +53,7 @@ export default class GoogleTracker extends BasicPriceTracker {
     }
   }
 
-  public async getPrices() {
+  public async getPrices(): Promise<PriceResult> {
     try {
       await this.setBrowser();
       await this.setNewPage();

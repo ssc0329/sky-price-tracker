@@ -1,5 +1,5 @@
 import * as puppeteer from "puppeteer";
-import { BasicPriceTracker } from "../common/basicPriceSearch";
+import { BasicPriceTracker, PriceResult } from "../common/basicPriceSearch";
 
 export default class SkyScannerTracker extends BasicPriceTracker {
   private async getSearchResult() {
@@ -19,7 +19,8 @@ export default class SkyScannerTracker extends BasicPriceTracker {
     await this.page.screenshot({ path: "dst/skyScannerExample.png" });
 
     return {
-      minPay,
+      minPrice: minPay,
+      from: "skyScanner",
     };
   }
 
@@ -47,7 +48,7 @@ export default class SkyScannerTracker extends BasicPriceTracker {
     }
   }
 
-  public async getPrices() {
+  public async getPrices(): Promise<PriceResult> {
     try {
       await this.setBrowser();
       await this.setNewPage();

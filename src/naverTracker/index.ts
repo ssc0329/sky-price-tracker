@@ -1,5 +1,5 @@
 import * as puppeteer from "puppeteer";
-import { BasicPriceTracker } from "../common/basicPriceSearch";
+import { BasicPriceTracker, PriceResult } from "../common/basicPriceSearch";
 
 export default class NaverTracker extends BasicPriceTracker {
   private async getSearchResult() {
@@ -20,7 +20,8 @@ export default class NaverTracker extends BasicPriceTracker {
     await this.page.screenshot({ path: "dst/naverExample.png" });
 
     return {
-      minPay,
+      minPrice: minPay,
+      from: "naver filght",
     };
   }
 
@@ -46,7 +47,7 @@ export default class NaverTracker extends BasicPriceTracker {
     }
   }
 
-  public async getPrices() {
+  public async getPrices(): Promise<PriceResult> {
     try {
       await this.setBrowser();
       await this.setNewPage();
