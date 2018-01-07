@@ -1,4 +1,3 @@
-import * as puppeteer from "puppeteer";
 import { BasicPriceTracker, PriceResult } from "../common/basicPriceSearch";
 
 export default class SkyScannerTracker extends BasicPriceTracker {

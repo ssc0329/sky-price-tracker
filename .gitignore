@@ -1,4 +1,4 @@
 node_modules
-dst
+dst/*.png
 .idea
 .code

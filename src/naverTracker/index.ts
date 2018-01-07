@@ -1,4 +1,3 @@
-import * as puppeteer from "puppeteer";
 import { BasicPriceTracker, PriceResult } from "../common/basicPriceSearch";
 
 export default class NaverTracker extends BasicPriceTracker {
@@ -43,7 +42,7 @@ export default class NaverTracker extends BasicPriceTracker {
   }
 
   private async getNaverSearchResultPage() {
-    https: if (this.page) {
+    if (this.page) {
       await this.page.goto(this.urlAddress);
     } else {
       throw new Error("Had Error on loading Naver main page.");
