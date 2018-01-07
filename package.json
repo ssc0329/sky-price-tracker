@@ -12,6 +12,7 @@
     "axios": "^0.17.1",
     "dynamoose": "^0.8.6",
     "lodash": "^4.17.4",
+    "node-cron": "^1.2.1",
     "puppeteer": "^0.13.0",
     "uuid": "^3.1.0"
   },

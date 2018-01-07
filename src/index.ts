@@ -4,6 +4,7 @@ import GoogleTracker from "./googleTracker";
 import SkyScannerTracker from "./skyScannerTarcker";
 import PriceTicketManager, { PriceTicketParams } from "./model/priceTicket";
 import { PriceResult } from "./common/basicPriceSearch";
+const cron = require("node-cron");
 
 const exampleFromAirport = "ICN";
 const exampleToAirport = "TAS";
@@ -51,10 +52,11 @@ async function searchPriceAndSaveIt() {
   });
 }
 
-(async () => {
+cron.schedule("*/1 * * * *", async () => {
   for (let i = 0; i < 30; i++) {
     await searchPriceAndSaveIt();
     exampleCheckIn.setDate(exampleCheckIn.getDate() + 1);
     exampleCheckOut.setDate(exampleCheckOut.getDate() + 1);
   }
-})();
+  console.log("running a task every minutes");
+});
