@@ -50,7 +50,7 @@ class BasicPriceTracker {
     }
     setBrowser() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.browser = yield puppeteer.launch();
+            this.browser = yield puppeteer.launch({ args: ["--no-sandbox", "--disable-setuid-sandbox"] });
         });
     }
     setNewPage() {

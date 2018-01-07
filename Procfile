@@ -1,1 +1,1 @@
-worker: node dst/index
+worker: npm run crawl
