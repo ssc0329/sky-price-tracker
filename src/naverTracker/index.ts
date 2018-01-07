@@ -22,6 +22,7 @@ export default class NaverTracker extends BasicPriceTracker {
     return {
       minPrice: minPay,
       from: "naver filght",
+      link: this.urlAddress,
     };
   }
 
@@ -31,17 +32,19 @@ export default class NaverTracker extends BasicPriceTracker {
     return `${date.getFullYear()}.${month}.${day}.`;
   }
 
+  private setDestinationUrl() {
+    this.urlAddress = `https://store.naver.com/flights/v2/results?trip=RT&scity1=${this.fromAirport}&ecity1=${
+      this.toAirport
+    }&scity2=${this.toAirport}&ecity2=${this.fromAirport}&adult=${
+      this.adultCount
+    }&child=0&infant=0&sdate1=${this.getFormatDate(this.checkInDate)}&sdate2=${this.getFormatDate(
+      this.checkOutDate,
+    )}&fareType=Y`;
+  }
+
   private async getNaverSearchResultPage() {
     https: if (this.page) {
-      await this.page.goto(
-        `https://store.naver.com/flights/v2/results?trip=RT&scity1=${this.fromAirport}&ecity1=${
-          this.toAirport
-        }&scity2=${this.toAirport}&ecity2=${this.fromAirport}&adult=${
-          this.adultCount
-        }&child=0&infant=0&sdate1=${this.getFormatDate(this.checkInDate)}&sdate2=${this.getFormatDate(
-          this.checkOutDate,
-        )}&fareType=Y`,
-      );
+      await this.page.goto(this.urlAddress);
     } else {
       throw new Error("Had Error on loading Naver main page.");
     }
@@ -51,6 +54,7 @@ export default class NaverTracker extends BasicPriceTracker {
     try {
       await this.setBrowser();
       await this.setNewPage();
+      this.setDestinationUrl();
       await this.getNaverSearchResultPage();
       await this.getSearchResult();
       return await this.mapSearchResult();

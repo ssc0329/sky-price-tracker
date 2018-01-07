@@ -16,6 +16,7 @@ This project does regular price tracking and on-demand price tracking for the ai
 
 * Homepage with AWS Lambda and Serverless framework.
 * ReactJS (\*Not decided yet)
+* Chrome plugin - new tab
 * Progress 0 / 10
 
 ## Crawling API
@@ -32,12 +33,12 @@ This project does regular price tracking and on-demand price tracking for the ai
 ## Crawling
 
 * Use PhantomJS to get JS rendering result. (I heard that I can use JS parser but I think it's too complex to use.)
-* Progress 1 / 10
+* Progress 3 / 10
 
 ## Database
 
-* Use DynamoDB with ORM(maybe Dynamo DB) - Not decided yet
-* Progress 0 / 10
+* Use DynamoDB with ORM(maybe Dynamo DB)
+* Progress 1 / 10
 
 # Contribute
 

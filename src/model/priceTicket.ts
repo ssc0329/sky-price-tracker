@@ -9,6 +9,7 @@ export interface PriceTicketParams {
   departTime: Date;
   arriveTime: Date;
   fromSite: string;
+  link: string;
 }
 
 const priceTicketSchema = new Schema(
@@ -23,6 +24,7 @@ const priceTicketSchema = new Schema(
     departTime: Date,
     arriveTime: Date,
     fromSite: String,
+    link: String,
   },
   {
     timestamps: true,
@@ -45,6 +47,7 @@ export default class PriceTicketManager {
       departTime: params.departTime,
       arriveTime: params.arriveTime,
       fromSite: params.fromSite,
+      link: params.link,
     });
 
     await priceTicket.save();

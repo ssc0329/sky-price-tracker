@@ -6,9 +6,9 @@ import PriceTicketManager, { PriceTicketParams } from "./model/priceTicket";
 import { PriceResult } from "./common/basicPriceSearch";
 
 const exampleFromAirport = "ICN";
-const exampleToAirport = "HKG";
-const exampleCheckIn = new Date(2018, 3, 10);
-const exampleCheckOut = new Date(2018, 3, 17);
+const exampleToAirport = "TAS";
+const exampleCheckIn = new Date(2018, 3, 1);
+const exampleCheckOut = new Date(2018, 3, 7);
 
 const naverTracker = new NaverTracker(exampleFromAirport, exampleToAirport, exampleCheckIn, exampleCheckOut, 2);
 const googleTracker = new GoogleTracker(exampleFromAirport, exampleToAirport, exampleCheckIn, exampleCheckOut, 2);
@@ -35,7 +35,7 @@ async function saveMinPriceToDynamoDB(params: PriceTicketParams) {
   }
 }
 
-(async () => {
+async function searchPriceAndSaveIt() {
   const priceSearchPromiseArray = [naverTracker.getPrices(), googleTracker.getPrices(), skyScannerTracker.getPrices()];
   const prices = await Promise.all(priceSearchPromiseArray);
   const minPriceResult = getMinimumPrice(prices);
@@ -47,5 +47,14 @@ async function saveMinPriceToDynamoDB(params: PriceTicketParams) {
     departTime: exampleCheckIn,
     arriveTime: exampleCheckOut,
     fromSite: minPriceResult.from,
+    link: minPriceResult.link,
   });
+}
+
+(async () => {
+  for (let i = 0; i < 30; i++) {
+    await searchPriceAndSaveIt();
+    exampleCheckIn.setDate(exampleCheckIn.getDate() + 1);
+    exampleCheckOut.setDate(exampleCheckOut.getDate() + 1);
+  }
 })();

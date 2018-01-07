@@ -21,6 +21,7 @@ export default class SkyScannerTracker extends BasicPriceTracker {
     return {
       minPrice: minPay,
       from: "skyScanner",
+      link: this.urlAddress,
     };
   }
 
@@ -34,15 +35,19 @@ export default class SkyScannerTracker extends BasicPriceTracker {
     return `${year}${month}${day}`;
   }
 
+  private setDestinationUrl() {
+    this.urlAddress = `https://www.skyscanner.co.kr/transport/flights/${this.fromAirport}/${
+      this.toAirport
+    }/${this.getFormatDate(this.checkInDate)}/${this.getFormatDate(this.checkOutDate)}?adults=${
+      this.adultCount
+    }&children=0&adultsv2=${
+      this.adultCount
+    }&childrenv2=&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=day-view#results`;
+  }
+
   private async getSearchResultPage() {
     if (this.page) {
-      await this.page.goto(
-        `https://www.skyscanner.co.kr/transport/flights/${this.fromAirport}/${this.toAirport}/${this.getFormatDate(
-          this.checkInDate,
-        )}/${this.getFormatDate(this.checkOutDate)}?adults=${this.adultCount}&children=0&adultsv2=${
-          this.adultCount
-        }&childrenv2=&infants=0&cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=day-view#results`,
-      );
+      await this.page.goto(this.urlAddress);
     } else {
       throw new Error("Had Error on loading SkyScanner page.");
     }
@@ -52,6 +57,7 @@ export default class SkyScannerTracker extends BasicPriceTracker {
     try {
       await this.setBrowser();
       await this.setNewPage();
+      this.setDestinationUrl();
       await this.getSearchResultPage();
       await this.getSearchResult();
       return await this.mapSearchResult();

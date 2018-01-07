@@ -3,6 +3,7 @@ import * as puppeteer from "puppeteer";
 export interface PriceResult {
   minPrice: number;
   from: string;
+  link: string;
 }
 
 const LINUX_CHROME_USER_AGENT =
@@ -11,13 +12,14 @@ const LINUX_CHROME_USER_AGENT =
 export class BasicPriceTracker {
   private browser: puppeteer.Browser;
   private _page: puppeteer.Page | null;
+  private _urlAddress: string;
 
   constructor(
     private _fromAirport: string,
     private _toAirport: string,
     private _checkInDate: Date,
     private _checkOutDate: Date,
-    private _adultCount: number, // TODO: Add children and baby option
+    private _adultCount: number,
   ) {}
 
   get page() {
@@ -46,6 +48,14 @@ export class BasicPriceTracker {
 
   get adultCount() {
     return this._adultCount;
+  }
+
+  set urlAddress(url: string) {
+    this._urlAddress = url;
+  }
+
+  get urlAddress() {
+    return this._urlAddress;
   }
 
   private setHumanUserAgent() {

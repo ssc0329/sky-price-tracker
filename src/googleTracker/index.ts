@@ -32,6 +32,7 @@ export default class GoogleTracker extends BasicPriceTracker {
     return {
       minPrice: minPay,
       from: "google flight",
+      link: this.urlAddress,
     };
   }
 
@@ -41,13 +42,15 @@ export default class GoogleTracker extends BasicPriceTracker {
     return `${date.getFullYear()}-${month}-${day}`;
   }
 
+  private setDestinationUrl() {
+    this.urlAddress = `https://www.google.com/flights/?curr=KRW#search;f=${this.fromAirport};t=${
+      this.toAirport
+    };d=${this.getFormatDate(this.checkInDate)};r=${this.getFormatDate(this.checkOutDate)};px=${this.adultCount}`;
+  }
+
   private async getGoogleSearchResultPage() {
     if (this.page) {
-      await this.page.goto(
-        `https://www.google.com/flights/?curr=KRW#search;f=${this.fromAirport};t=${
-          this.toAirport
-        };d=${this.getFormatDate(this.checkInDate)};r=${this.getFormatDate(this.checkOutDate)};px=${this.adultCount}`,
-      );
+      await this.page.goto(this.urlAddress);
     } else {
       throw new Error("Had Error on loading Google main page.");
     }
@@ -57,6 +60,7 @@ export default class GoogleTracker extends BasicPriceTracker {
     try {
       await this.setBrowser();
       await this.setNewPage();
+      this.setDestinationUrl();
       await this.getGoogleSearchResultPage();
       await this.getSearchResult();
       return await this.mapSearchResult();
